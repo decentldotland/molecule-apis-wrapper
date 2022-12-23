@@ -1,0 +1,26 @@
+{
+  "name": "tonweb-wrapper",
+  "version": "0.0.1",
+  "description": "tonweb library wrapper, util repo for molecule.sh",
+  "type": "module",
+  "main": "./server/api.js",
+  "scripts": {
+    "start": "node ./server/api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decentldotland/tonweb-wrapper.git"
+  },
+  "author": "charmful0x",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/decentldotland/tonweb-wrapper/issues"
+  },
+  "homepage": "https://github.com/decentldotland/tonweb-wrapper#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "tonweb": "^0.0.58",
+    "tweetnacl": "^1.0.3"
+  }
+}
