@@ -31,5 +31,19 @@ npm install && npm run start
 - `message` : base64 encoded
 - `pubkey` and `signature` : base58 encoded
 
+## Tezos Wrapper
+
+- `GET /tezos/:pubkey/:message/:signature`
+
+#### Parameters Format:
+- `message` : base64 encoded
+
+## Deso Wrapper
+
+- `GET /deso/:pubkey/:message/:signature`
+
+#### Parameters Format:
+- `message` : base64 encoded
+
 ## License
 This repository is licensed under the [MIT license](./LICENSE)
