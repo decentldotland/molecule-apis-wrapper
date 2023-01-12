@@ -3,6 +3,7 @@ import cors from "cors";
 import { isTonSigner } from "./utils/ton/signer.js";
 import { isMassaSigner } from "./utils/massa/signer.js";
 import { isDesoSigner } from "./utils/deso/signer.js";
+import { isTezosSigner } from "./utils/tezos/signer.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -56,7 +57,22 @@ app.get("/deso/:address/:message/:signature", async (req, res) => {
     res.send({ result: false, address: null });
     return;
   }
-})
+});
+
+app.get("/tezos/:pubkey/:message/:signature", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { pubkey, message, signature } = req.params;
+
+    const response = await isTezosSigner(message, pubkey, signature);
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ result: false, address: null });
+    return;
+  }
+});
 
 app.listen(port, async () => {
   console.log(`listening at PORT:${port}`);
