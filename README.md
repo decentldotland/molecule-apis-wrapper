@@ -45,5 +45,15 @@ npm install && npm run start
 #### Parameters Format:
 - `message` : base64 encoded
 
+## Aptos Wrapper
+
+- `GET /aptos/:pubkey/:message/:signature`
+
+#### Parameters Format:
+- `message` : base64 encoded
+- `pubkey` and `signature` : hex string
+
+
+
 ## License
 This repository is licensed under the [MIT license](./LICENSE)

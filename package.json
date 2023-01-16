@@ -1,6 +1,6 @@
 {
   "name": "molecule-apis-wrapper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "web3 libraries wrapper, util repo for molecule.sh",
   "type": "module",
   "main": "./server/api.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@noble/ed25519": "^1.7.1",
     "@noble/hashes": "^1.1.5",
+    "@polkadot/util": "^10.2.6",
     "@taquito/utils": "^15.0.1",
     "base58check": "^2.0.0",
     "base64url": "^3.0.1",
