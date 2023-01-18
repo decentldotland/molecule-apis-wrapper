@@ -5,6 +5,7 @@ import { isMassaSigner } from "./utils/massa/signer.js";
 import { isDesoSigner } from "./utils/deso/signer.js";
 import { isTezosSigner } from "./utils/tezos/signer.js";
 import { isAptosSigner } from "./utils/aptos/signer.js";
+import { getEverTx } from "./utils/everpay/tx.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -86,6 +87,26 @@ app.get("/aptos/:pubkey/:message/:signature", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send({ result: false, address: null });
+    return;
+  }
+});
+
+app.get("/everpay/tx/:txid", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { txid } = req.params;
+
+    const response = await getEverTx(txid);
+
+    if (response === null) {
+      res.send({ molecule_error: "invalid_txid" });
+      return;
+    }
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ molecule_error: "invalid_txid" });
     return;
   }
 });

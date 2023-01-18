@@ -53,6 +53,10 @@ npm install && npm run start
 - `message` : base64 encoded
 - `pubkey` and `signature` : hex string
 
+## EverPay Wrapper
+
+- `GET /everpay/tx/:txid`
+
 
 
 ## License
