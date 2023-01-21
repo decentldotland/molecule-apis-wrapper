@@ -6,6 +6,7 @@ import { isDesoSigner } from "./utils/deso/signer.js";
 import { isTezosSigner } from "./utils/tezos/signer.js";
 import { isAptosSigner } from "./utils/aptos/signer.js";
 import { getEverTx } from "./utils/everpay/tx.js";
+import { getTokenPrice } from "./utils/redstone/api.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -106,10 +107,26 @@ app.get("/everpay/tx/:txid", async (req, res) => {
     return;
   } catch (error) {
     console.log(error);
-    res.send({ molecule_error: "invalid_txid" });
+    res.send({ molecule_error: "everpay_invalid_txid" });
     return;
   }
 });
+
+app.get("/redstone/:ticker", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { ticker } = req.params;
+
+    const response = await getTokenPrice(ticker);
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ molecule_error: "redstone_error" });
+    return;
+  }
+});
+
 
 app.listen(port, async () => {
   console.log(`listening at PORT:${port}`);
