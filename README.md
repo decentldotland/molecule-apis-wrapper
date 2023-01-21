@@ -57,7 +57,9 @@ npm install && npm run start
 
 - `GET /everpay/tx/:txid`
 
+## Redstone Wrapper
 
+- `GET /redstone/:ticker`
 
 ## License
 This repository is licensed under the [MIT license](./LICENSE)
