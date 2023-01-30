@@ -5,6 +5,7 @@ import { isMassaSigner } from "./utils/massa/signer.js";
 import { isDesoSigner } from "./utils/deso/signer.js";
 import { isTezosSigner } from "./utils/tezos/signer.js";
 import { isAptosSigner } from "./utils/aptos/signer.js";
+import { isNostrSigner } from "./utils/nostr/signer.js";
 import { getEverTx } from "./utils/everpay/tx.js";
 import { getTokenPrice } from "./utils/redstone/api.js";
 
@@ -83,6 +84,21 @@ app.get("/aptos/:pubkey/:message/:signature", async (req, res) => {
     const { pubkey, message, signature } = req.params;
 
     const response = await isAptosSigner(message, pubkey, signature);
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ result: false, address: null });
+    return;
+  }
+});
+
+app.get("/nostr/:pubkey/:id/:signature", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { pubkey, id, signature } = req.params;
+
+    const response = await isNostrSigner(id, pubkey, signature);
     res.send(response);
     return;
   } catch (error) {
