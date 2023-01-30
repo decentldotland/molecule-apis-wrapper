@@ -55,7 +55,7 @@ npm install && npm run start
 
 ## Nostr Wrapper
 
-- `GET /aptos/:id/:pubkey/:signature`
+- `GET /nostr/:id/:pubkey/:signature`
 
 #### Parameters Format:
 - `id`: event id
