@@ -53,6 +53,13 @@ npm install && npm run start
 - `message` : base64 encoded
 - `pubkey` and `signature` : hex string
 
+## Nostr Wrapper
+
+- `GET /aptos/:id/:pubkey/:signature`
+
+#### Parameters Format:
+- `id`: event id
+
 ## EverPay Wrapper
 
 - `GET /everpay/tx/:txid`
@@ -60,6 +67,7 @@ npm install && npm run start
 ## Redstone Wrapper
 
 - `GET /redstone/:ticker`
+
 
 ## License
 This repository is licensed under the [MIT license](./LICENSE)
