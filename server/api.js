@@ -93,12 +93,12 @@ app.get("/aptos/:pubkey/:message/:signature", async (req, res) => {
   }
 });
 
-app.get("/nostr/:pubkey/:id/:signature", async (req, res) => {
+app.get("/nostr/:encoded_event/:pubkey/:encoded_content", async (req, res) => {
   try {
     res.setHeader("Content-Type", "application/json");
-    const { pubkey, id, signature } = req.params;
+    const { encoded_event, pubkey, encoded_content } = req.params;
 
-    const response = await isNostrSigner(id, pubkey, signature);
+    const response = await isNostrSigner(encoded_event, pubkey, encoded_content);
     res.send(response);
     return;
   } catch (error) {
