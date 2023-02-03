@@ -55,10 +55,14 @@ npm install && npm run start
 
 ## Nostr Wrapper
 
-- `GET /nostr/:id/:pubkey/:signature`
+- `GET /nostr/:encoded_event/:pubkey/:encoded_content`
 
 #### Parameters Format:
-- `id`: event id
+- `encoded_event`: base64 encoded string of the stringified Nostr signing object
+
+- `pubkey`: the caller's Nostr public key
+
+- `encoded_content`: the expected signature message from the Nostr signature
 
 ## EverPay Wrapper
 
