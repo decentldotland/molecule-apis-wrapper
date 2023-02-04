@@ -8,6 +8,7 @@ import { isAptosSigner } from "./utils/aptos/signer.js";
 import { isNostrSigner } from "./utils/nostr/signer.js";
 import { getEverTx } from "./utils/everpay/tx.js";
 import { getTokenPrice } from "./utils/redstone/api.js";
+import { getArkNfCollection } from "./utils/ark-nft/state.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -139,6 +140,20 @@ app.get("/redstone/:ticker", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send({ molecule_error: "redstone_error" });
+    return;
+  }
+});
+
+app.get("/ark-collection", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+
+    const response = await getArkNfCollection();
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ molecule_error: "moralis_error" });
     return;
   }
 });
