@@ -8,7 +8,7 @@ import { isAptosSigner } from "./utils/aptos/signer.js";
 import { isNostrSigner } from "./utils/nostr/signer.js";
 import { getEverTx } from "./utils/everpay/tx.js";
 import { getTokenPrice } from "./utils/redstone/api.js";
-import { getArkNfCollection } from "./utils/ark-nft/state.js";
+import { getNftCollection } from "./utils/ark-nft/state.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -144,11 +144,11 @@ app.get("/redstone/:ticker", async (req, res) => {
   }
 });
 
-app.get("/ark-collection", async (req, res) => {
+app.get("/sender-form-collection/:contract_address", async (req, res) => {
   try {
     res.setHeader("Content-Type", "application/json");
-
-    const response = await getArkNfCollection();
+    const { contract_address } = req.params;
+    const response = await getNftCollection(contract_address);
     res.send(response);
     return;
   } catch (error) {
