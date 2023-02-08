@@ -1,13 +1,16 @@
 import axios from "axios";
+import assert from "node:assert";
+import { NFT_COLLECTIONS } from "../constants.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function getArkNfCollection() {
+export async function getNftCollection(contract_address) {
   try {
+    assert.equal(NFT_COLLECTIONS.includes(contract_address), true);
     const req = (
       await axios.get(
-        `https://deep-index.moralis.io/api/v2/nft/0xb1cdb97ddc2b05ad9be7be17eabba3a0f42453fa/owners?chain=eth&format=decimal`,
+        `https://deep-index.moralis.io/api/v2/nft/${contract_address}/owners?chain=eth&format=decimal`,
         {
           headers: {
             Accept: "application/json",
