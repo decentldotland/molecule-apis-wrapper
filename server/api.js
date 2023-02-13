@@ -9,6 +9,7 @@ import { isNostrSigner } from "./utils/nostr/signer.js";
 import { getEverTx } from "./utils/everpay/tx.js";
 import { getTokenPrice } from "./utils/redstone/api.js";
 import { getNftCollection } from "./utils/ark-nft/state.js";
+import { getErc20BalanceOf } from "./utils/erc20s/balance.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -149,6 +150,20 @@ app.get("/sender-form-collection/:contract_address", async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     const { contract_address } = req.params;
     const response = await getNftCollection(contract_address);
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ molecule_error: "moralis_error" });
+    return;
+  }
+});
+
+app.get("/sender-form-erc20/:address/:token", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { address, token } = req.params;
+    const response = await getErc20BalanceOf(address, token);
     res.send(response);
     return;
   } catch (error) {
