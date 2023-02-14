@@ -5,8 +5,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function getNftCollection(contract_address) {
+export async function getNftCollection(contract_address, evm_address) {
   try {
+    if (contract_address === "rwp") {
+      return await _isRss3NftHolder(evm_address);
+    }
     assert.equal(NFT_COLLECTIONS.includes(contract_address), true);
     const req = (
       await axios.get(
@@ -25,3 +28,16 @@ export async function getNftCollection(contract_address) {
     throw error;
   }
 }
+
+async function _isRss3NftHolder(evm_address) {
+    try {
+      const req = await axios(`https://arweave.net/gA4_j6X578IMbmo-s_Lhs0WOmEks0EjjCiBey_vx7FQ`);
+      const snapshot = req?.data
+      const isOwner = snapshot.map((entry) => entry?.Owner.toLowerCase()).includes(evm_address.toLowerCase());
+      console.log(isOwner)
+      return isOwner;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
+  }
