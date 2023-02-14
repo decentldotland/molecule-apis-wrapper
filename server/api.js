@@ -145,11 +145,11 @@ app.get("/redstone/:ticker", async (req, res) => {
   }
 });
 
-app.get("/sender-form-collection/:contract_address", async (req, res) => {
+app.get("/sender-form-collection/:contract_address/:optional_address?", async (req, res) => {
   try {
     res.setHeader("Content-Type", "application/json");
-    const { contract_address } = req.params;
-    const response = await getNftCollection(contract_address);
+    const { contract_address, optional_address } = req.params;
+    const response = await getNftCollection(contract_address, optional_address);
     res.send(response);
     return;
   } catch (error) {
