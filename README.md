@@ -73,5 +73,12 @@ npm install && npm run start
 - `GET /redstone/:ticker`
 
 
+## ANS Storage Wrapper
+
+- `GET /ans/store-sig/:sig`
+
+#### Parameters Format
+- `sig` : Arweave signature encoded in base64
+
 ## License
 This repository is licensed under the [MIT license](./LICENSE)
