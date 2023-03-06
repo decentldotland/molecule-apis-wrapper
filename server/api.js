@@ -10,6 +10,7 @@ import { getEverTx } from "./utils/everpay/tx.js";
 import { getTokenPrice } from "./utils/redstone/api.js";
 import { getNftCollection } from "./utils/ark-nft/state.js";
 import { getErc20BalanceOf } from "./utils/erc20s/balance.js";
+import { storeSig } from "./utils/ans/sig-store.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -169,6 +170,20 @@ app.get("/sender-form-erc20/:address/:token", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send({ molecule_error: "moralis_error" });
+    return;
+  }
+});
+
+app.get("/ans/store-sig/:sig", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "application/json");
+    const { sig } = req.params;
+    const response = await storeSig(sig);
+    res.send(response);
+    return;
+  } catch (error) {
+    console.log(error);
+    res.send({ molecule_error: "ans_sig_storage_error" });
     return;
   }
 });
